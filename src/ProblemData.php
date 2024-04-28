@@ -69,9 +69,21 @@ class ProblemData implements JsonSerializable
         return $this->title;
     }
 
+    public function setTitle(UriInterface|string|null $title): static
+    {
+        $this->title = $title;
+        return $this;
+    }
+
     public function getDetail(): ?string
     {
         return $this->detail;
+    }
+
+    public function setDetail(?string $detail): static
+    {
+        $this->detail = $detail;
+        return $this;
     }
 
     public function getType(): ?string
@@ -79,13 +91,32 @@ class ProblemData implements JsonSerializable
         return $this->type;
     }
 
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+        return $this;
+    }
+
     public function getInstance(): UriInterface|string|null
     {
         return $this->instance;
+    }
+
+    public function setInstance(UriInterface|string|null $instance): static
+    {
+        $this->instance = $instance;
+        return $this;
     }
 
     public function getExtensions(): array
     {
         return $this->extensions;
     }
+
+    public function setExtensions(array $extensions): static
+    {
+        $this->extensions = $extensions;
+        return $this;
+    }
+
 }
