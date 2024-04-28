@@ -1,0 +1,21 @@
+{
+    "name": "byfareska/problem",
+    "description": "RFC 7807 wrapper for Symfony HttpFoundation component (application/problem+json)",
+    "type": "library",
+    "require": {
+        "symfony/http-foundation": ">=4.0",
+        "psr/http-message": ">=1.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Byfareska\\Problem\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Karol Szarafinowski",
+            "email": "karol@szarafinowski.pl"
+        }
+    ]
+}
