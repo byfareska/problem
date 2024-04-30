@@ -48,6 +48,8 @@ class ProblemJsonResponse extends JsonResponse
      */
     protected function update(): static
     {
+        $this->updateStatus();
+
         if (null !== $this->callback) {
             // Not using application/javascript for compatibility reasons with older browsers.
             $this->headers->set('Content-Type', 'text/javascript');
@@ -61,8 +63,6 @@ class ProblemJsonResponse extends JsonResponse
             $this->headers->set('Content-Type', 'application/problem+json');
         }
 
-        $this->updateStatus();
-
         return $this->setContent($this->data);
     }
 
@@ -74,6 +74,17 @@ class ProblemJsonResponse extends JsonResponse
 
         if (is_array($this->data) && !isset($this->data['type'])) {
             $this->data['type'] = self::DEFAULT_TYPES[$this->getStatusCode()] ?? null;
+        }
+
+        if (is_string($this->data)) {
+            try {
+                $data = json_decode($this->data, true, 512, JSON_THROW_ON_ERROR);
+                if(!isset($data['type'])) {
+                    $data['type'] = self::DEFAULT_TYPES[$this->getStatusCode()] ?? null;
+                    $this->data = json_encode($data, JSON_THROW_ON_ERROR);
+                }
+            } catch (\JsonException $e) {
+            }
         }
     }
 }
